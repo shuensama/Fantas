@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "Fantas/Application.h"
-
+#include "Fantas/Log.h"
 
 // ---Entry Point-------------
 #include "Fantas/EntryPoint.h"
