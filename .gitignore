@@ -1,0 +1,15 @@
+# Binaries
+**/bin/
+bin_int/
+Intermediates/
+
+# Fantas files
+*.log
+
+# Visual Studio files and folder
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
+**.csproj
