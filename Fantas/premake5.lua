@@ -20,6 +20,7 @@ project "Fantas"
         "Source",
         "%{IncludeDir.glm}",
         "%{IncludeDir.glfw}",
+        "%{IncludeDir.spdlog}",
         "%{IncludeDir.VulkanSDK}"
     }
 
