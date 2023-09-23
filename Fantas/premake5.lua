@@ -1,76 +1,45 @@
 project "Fantas"
-    location "Fantas"
-    kind "SharedLib"
+    kind "ConsoleApp"
 
     language "C++"
 
-	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("%{wks.location}/bin_int/" .. outputdir .. "/%{prj.name}")
+    targetdir ("%{wks.location}/build/bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("%{wks.location}/build/bin_int/" .. outputdir .. "/%{prj.name}")
     
 
     files
     {
         "Source/**.h",
-        "Source/**.cpp"
+        "Source/**.cpp",
+        "ThirdParty/glm/glm/**.hpp",
+		"ThirdParty/glm/glm/**.inl"
     }
 
     includedirs
     {
         "Source",
-        "%{IncludeDir.spdlog}",
-		"%{IncludeDir.Box2D}",
-		"%{IncludeDir.filewatch}",
-		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}",
-		"%{IncludeDir.msdfgen}",
-		"%{IncludeDir.msdf_atlas_gen}",
-		"%{IncludeDir.stb_image}",
-		"%{IncludeDir.entt}",
-		"%{IncludeDir.mono}",
-		"%{IncludeDir.yaml_cpp}",
-		"%{IncludeDir.ImGuizmo}",
-		"%{IncludeDir.VulkanSDK}"
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.glfw}",
+        "%{IncludeDir.VulkanSDK}"
     }
 
-    links
-	{
-		"Box2D",
-		"GLFW",
-		"Glad",
-		"ImGui",
-		"msdf-atlas-gen",
-		"yaml-cpp",
-		"opengl32.lib",
+    links 
+    {
+        "glfw",
+        "%{Library.Vulkan}"
+    }
 
-		"%{Library.mono}",
-	}
+filter "configurations:Debug"
+    defines "FT_DEBUG"
+    runtime "Debug"
+    symbols "On"
 
-    filter "system:windows"
-        cppdialect "c++17"
-        staticruntime "on"
-        systemversion "latest"
+filter "configurations:RELEASE"
+    defines "FT_RELEASE"
+    runtime "Release"
+    optimize "On"
 
-        defines
-        {
-            "FT_PLATFORM_WINDOWS",
-            "FT_BUILD_DLL"
-        }
-
-        postbuildcommands
-        {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/SaintofLove")
-        }
-    
-    filter "configurations:Debug"
-        defines "FT_DEBUG"
-        symbols "On"
-
-    filter "configurations:RELEASE"
-        defines "FT_RELEASE"
-        optimize "On"
-
-    filter "configurations:DIST"
-        defines "FT_DIST"
-        optimize "On"
+filter "configurations:DIST"
+    defines "FT_DIST"
+    runtime "Release"
+    optimize "On"

@@ -1,9 +1,8 @@
 include "Dependencies.lua"
 
-
 workspace "Fantas"
     architecture "x64"
-
+    cppdialect "c++17"
     configurations
     {
         "Debug",
@@ -11,32 +10,12 @@ workspace "Fantas"
         "Dist"
     }
 
-    solution_items
-	{
-		".editorconfig"
-	}
-
-	flags
-	{
-		"MultiProcessorCompile"
-	}
-
 outputdir = "%{cfg.buildcfg}_%{cfg.system}_%{cfg.architecture}"
 
-
 group "Dependencies"
-	include "Fantas/ThirdParty/Box2D"
-	include "Fantas/ThirdParty/glfw"
-	include "Fantas/ThirdParty/Glad"
-	include "Fantas/ThirdParty/msdf-atlas-gen"
-	include "Fantas/ThirdParty/imgui"
-	include "Fantas/ThirdParty/yaml-cpp"
+    include "Fantas/ThirdParty/glfw"
 group ""
 
 group "Core"
-	include "Fantas"
-group ""
-
-group "Misc"
-	include "SaintofLove"
+    include "Fantas"
 group ""

@@ -17,8 +17,7 @@ project "SaintofLove"
     {
         "Fantas/Source",
         "%{IncludeDir.spdlog}",
-        "%{IncludeDir.glm}",
-		"%{IncludeDir.entt}"
+        "%{IncludeDir.glm}"
     }
 
     links
